@@ -180,16 +180,7 @@
     </div>
 
     <script>
-        const audio = document.getElementById('musica');
-
-        window.addEventListener('DOMContentLoaded', () => {
-            audio.load();
-        });
-
         function cerrarBienvenida() {
-            audio.volume = 1.0;
-            audio.play().catch(error => console.log("Audio play failed:", error));
-            
             document.getElementById('modal-bienvenida').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('modal-bienvenida').style.display = 'none';
@@ -197,15 +188,11 @@
         }
 
         function abrir(url) {
-            // Pausar música al abrir experiencia
-            audio.pause();
             document.getElementById('contenedorGenially').style.display = 'block';
             document.getElementById('iframeG').src = url;
         }
 
         function cerrar() {
-            // Reanudar música al volver al menú
-            audio.play().catch(error => console.log("Audio resume failed:", error));
             document.getElementById('contenedorGenially').style.display = 'none';
             document.getElementById('iframeG').src = "";
         }
