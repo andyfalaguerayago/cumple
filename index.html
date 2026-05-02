@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>¡La Fiesta del Año!</title>
+    <style>
+        /* Eliminamos todos los espacios y scrolls */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Evita el rebote o scroll innecesario */
+            background-color: #ffffff; /* Color de fondo mientras carga */
+        }
+
+        /* Forzamos al iframe a ser una capa absoluta sobre toda la pantalla */
+        .contenedor-genially {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-genially">
+        <iframe 
+            title="la fiesta del año" 
+            src="https://view.genially.com/69f5b407e5dfae9ae1897d74" 
+            type="text/html" 
+            allowscriptaccess="always" 
+            allowfullscreen="true" 
+            scrolling="yes" 
+            allownetworking="all">
+        </iframe>
+    </div>
+
+</body>
+</html>
