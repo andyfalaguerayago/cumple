@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>¡La Fiesta del Año!</title>
+    <title>Hub del Cumpleaños de Andy</title>
     <style>
         * {
             margin: 0;
@@ -15,147 +15,197 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #111111; /* Fondo oscuro moderno */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Fondo de pantalla */
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://t4.ftcdn.net/jpg/04/19/38/47/360_F_419384788_LRXd3XpqTxjnyRLethyithLwPE26ksrv.jpg');
+            background-size: cover;
+            background-position: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
+        /* CUADRO DE BIENVENIDA (MODAL) */
+        #modal-bienvenida {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .cuadro-info {
+            background: #222;
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            border: 2px solid #e91e63;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 0 30px rgba(233, 30, 99, 0.3);
+        }
+
+        .cuadro-info h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .cuadro-info p {
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .btn-empezar {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-empezar:hover {
+            transform: scale(1.1);
+            background: #ff4081;
+        }
+
+        /* INTERFAZ PRINCIPAL */
         h1 {
-            color: #ffffff;
+            color: white;
             margin-bottom: 40px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            font-weight: 900;
         }
 
         .menu-container {
             display: flex;
             flex-direction: column;
             gap: 20px;
-            width: 90%;
-            max-width: 450px;
+            width: 85%;
+            max-width: 500px;
         }
 
-        .btn {
+        .btn-opcion {
             color: white;
             text-decoration: none;
-            padding: 22px;
-            text-align: center;
-            border-radius: 15px;
-            font-weight: bold;
+            padding: clamp(20px, 4vh, 30px);
+            border-radius: 20px;
+            font-weight: 900;
             font-size: 1.3rem;
-            transition: transform 0.2s, background 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
             border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
 
-        /* Botón de Invitación */
-        .btn-invitacion {
-            background: #e91e63;
-        }
-        .btn-invitacion:hover {
-            background: #c2185b;
-            transform: scale(1.03);
-        }
+        .btn-inv { background: linear-gradient(45deg, #e91e63, #ff4081); }
+        .btn-esc { background: linear-gradient(45deg, #9c27b0, #ba68c8); }
 
-        /* Botón de Escape Room */
-        .btn-escape {
-            background: #9c27b0;
-        }
-        .btn-escape:hover {
-            background: #7b1fa2;
-            transform: scale(1.03);
-        }
+        .btn-opcion:hover { transform: translateY(-5px); filter: brightness(1.1); }
 
-        /* Contenedores para modo embed */
-        .contenedor-genially {
-            display: none; /* Se oculta por defecto hasta seleccionar una opción */
-            position: absolute;
+        /* IFRAME FULLSCREEN */
+        #contenedorGenially {
+            display: none;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #ffffff;
+            background: black;
+            z-index: 5000;
         }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        iframe { width: 100%; height: 100%; border: none; }
 
         .btn-volver {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            z-index: 9999;
-            background: rgba(0,0,0,0.7);
+            top: 20px;
+            left: 20px;
+            z-index: 6000;
+            background: rgba(0,0,0,0.8);
             color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 12px 20px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.9rem;
+            border: 1px solid white;
+        }
+
+        @media (min-width: 768px) {
+            .menu-container { flex-direction: row; max-width: 700px; }
+            .btn-opcion { flex: 1; }
         }
     </style>
 </head>
 <body>
 
-    <h1 id="titulo-menu">¡BIENVENIDOS A MIS 13!</h1>
-    
-    <div class="menu-container" id="menu-botones">
-        <button class="btn btn-invitacion" onclick="mostrarGenially('https://view.genially.com/69f5b407e5dfae9ae1897d74', 'Invitación')">
-            💌 INVITACIÓN
-        </button>
-        <button class="btn btn-escape" onclick="mostrarGenially('https://view.genially.com/69f624e1d0a769f8e2813e36', 'Escape Room')">
-            🎮 ESCAPE ROOM
-        </button>
+    <!-- Cuadro de Bienvenida -->
+    <div id="modal-bienvenida">
+        <div class="cuadro-info">
+            <h2>¡Hola!</h2>
+            <p>Bienvenidos al hub del cumpleaños de Andy.<br>Pulsa empezar para continuar.</p>
+            <button class="btn-empezar" onclick="cerrarBienvenida()">EMPEZAR</button>
+        </div>
     </div>
 
-    <div id="contenedorGenially" class="contenedor-genially">
-        <a href="javascript:ocultarGenially()" class="btn-volver">⬅ Volver al Menú</a>
-        <iframe 
-            id="iframeGenially"
-            title="Genially" 
-            src="" 
-            type="text/html" 
-            allowscriptaccess="always" 
-            allowfullscreen="true" 
-            scrolling="yes" 
-            allownetworking="all">
-        </iframe>
+    <!-- Música de fondo -->
+    <audio id="musica" loop>
+        <source src="https://files.catbox.moe/v72zu4.mp3" type="audio/mpeg">
+    </audio>
+
+    <h1>¿QUÉ QUIERES VER?</h1>
+
+    <div class="menu-container">
+        <button class="btn-opcion btn-inv" onclick="abrir('https://view.genially.com/69f5b407e5dfae9ae1897d74')">💌 INVITACIÓN</button>
+        <button class="btn-opcion btn-esc" onclick="abrir('https://view.genially.com/69f624e1d0a769f8e2813e36')">🎮 ESCAPE ROOM</button>
+    </div>
+
+    <div id="contenedorGenially">
+        <a href="javascript:cerrar()" class="btn-volver">⬅ VOLVER</a>
+        <iframe id="iframeG" src=""></iframe>
     </div>
 
     <script>
-        function mostrarGenially(url, titulo) {
-            // Ocultar menú
-            document.getElementById('titulo-menu').style.display = 'none';
-            document.getElementById('menu-botones').style.display = 'none';
+        const audio = document.getElementById('musica');
 
-            // Mostrar el contenedor y asignar el título e iframe
-            const contenedor = document.getElementById('contenedorGenially');
-            const iframe = document.getElementById('iframeGenially');
-            
-            iframe.title = titulo;
-            iframe.src = url;
-            contenedor.style.display = 'block';
+        function cerrarBienvenida() {
+            // Reproducir música (ahora el navegador lo permite por el clic)
+            audio.play();
+            // Ocultar cuadro
+            document.getElementById('modal-bienvenida').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('modal-bienvenida').style.display = 'none';
+            }, 500);
         }
 
-        function ocultarGenially() {
-            // Ocultar el contenedor del iframe
-            document.getElementById('contenedorGenially').style.display = 'none';
+        function abrir(url) {
+            document.getElementById('contenedorGenially').style.display = 'block';
+            document.getElementById('iframeG').src = url;
+        }
 
-            // Mostrar el menú
-            document.getElementById('titulo-menu').style.display = 'block';
-            document.getElementById('menu-botones').style.display = 'flex';
-            
-            // Pausar/limpiar el iframe para que no consuma datos ni suene de fondo al salir
-            document.getElementById('iframeGenially').src = "";
+        function cerrar() {
+            document.getElementById('contenedorGenially').style.display = 'none';
+            document.getElementById('iframeG').src = "";
         }
     </script>
-
 </body>
 </html>
