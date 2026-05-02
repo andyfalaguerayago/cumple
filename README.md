@@ -1,3 +1,4 @@
+<img width="1024" height="1024" alt="cumpleandy_logo" src="https://github.com/user-attachments/assets/23af8281-edb8-4eb6-bc94-028daf90b6ba" />
 # 🎂 Hub del Cumpleaños de Andy
 
 Un portal web elegante e interactivo diseñado para centralizar todas las actividades de cumpleaños, con un modal de bienvenida personalizado e integración fluida con experiencias de Genially.
