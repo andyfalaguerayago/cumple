@@ -20,7 +20,7 @@
 
         /* Fondo de pantalla */
         body {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
                         url('https://t4.ftcdn.net/jpg/04/19/38/47/360_F_419384788_LRXd3XpqTxjnyRLethyithLwPE26ksrv.jpg');
             background-size: cover;
             background-position: center;
@@ -28,6 +28,15 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 20px;
+        }
+
+        /* LOGO */
+        .logo-vertical {
+            width: 220px; /* Un poco más grande al ser el único logo */
+            height: auto;
+            margin-bottom: 40px;
+            filter: drop-shadow(0 5px 20px rgba(0,0,0,0.6));
         }
 
         /* CUADRO DE BIENVENIDA (MODAL) */
@@ -50,10 +59,10 @@
             padding: 40px;
             border-radius: 25px;
             text-align: center;
-            border: 2px solid #e91e63;
+            border: 2px solid #00d2ff;
             max-width: 400px;
             width: 90%;
-            box-shadow: 0 0 30px rgba(233, 30, 99, 0.3);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
         }
 
         .cuadro-info h2 {
@@ -69,8 +78,8 @@
         }
 
         .btn-empezar {
-            background: #e91e63;
-            color: white;
+            background: #00d2ff;
+            color: #000;
             border: none;
             padding: 15px 40px;
             border-radius: 50px;
@@ -83,42 +92,46 @@
 
         .btn-empezar:hover {
             transform: scale(1.1);
-            background: #ff4081;
+            background: #ffffff;
         }
 
         /* INTERFAZ PRINCIPAL */
-        h1 {
-            color: white;
-            margin-bottom: 40px;
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            font-weight: 900;
-        }
-
         .menu-container {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 85%;
-            max-width: 500px;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 100%;
+            max-width: 550px;
+            justify-content: center;
         }
 
         .btn-opcion {
             color: white;
             text-decoration: none;
-            padding: clamp(20px, 4vh, 30px);
+            padding: clamp(18px, 3vh, 25px);
             border-radius: 20px;
             font-weight: 900;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             border: none;
             cursor: pointer;
             transition: 0.3s;
             text-transform: uppercase;
             box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
 
-        .btn-inv { background: linear-gradient(45deg, #e91e63, #ff4081); }
+        .btn-inv { background: linear-gradient(45deg, #00d2ff, #3a7bd5); }
         .btn-esc { background: linear-gradient(45deg, #9c27b0, #ba68c8); }
+        
+        .btn-git { 
+            background: linear-gradient(45deg, #333, #000);
+            border: 1px solid #555;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
 
         .btn-opcion:hover { transform: translateY(-5px); filter: brightness(1.1); }
 
@@ -151,8 +164,7 @@
         }
 
         @media (min-width: 768px) {
-            .menu-container { flex-direction: row; max-width: 700px; }
-            .btn-opcion { flex: 1; }
+            .btn-inv, .btn-esc { width: calc(50% - 8px); }
         }
     </style>
 </head>
@@ -167,11 +179,17 @@
         </div>
     </div>
 
-    <h1>¿QUÉ QUIERES VER?</h1>
+    <!-- Logo Vertical -->
+    <img src="https://file.garden/afW_Y0vtaUHOO25a/cumpleandy_logo-vertical.png" alt="Logo Cumpleaños de Andy" class="logo-vertical">
 
     <div class="menu-container">
         <button class="btn-opcion btn-inv" onclick="abrir('https://view.genially.com/69f5b407e5dfae9ae1897d74')">💌 INVITACIÓN</button>
         <button class="btn-opcion btn-esc" onclick="abrir('https://view.genially.com/69f624e1d0a769f8e2813e36')">🎮 ESCAPE ROOM</button>
+        
+        <!-- Botón de GitHub -->
+        <button class="btn-opcion btn-git" onclick="window.open('https://github.com/bypssd/cumple/', '_blank')">
+            📂 Visitar repo de GitHub
+        </button>
     </div>
 
     <div id="contenedorGenially">
@@ -196,6 +214,10 @@
             document.getElementById('contenedorGenially').style.display = 'none';
             document.getElementById('iframeG').src = "";
         }
+        
+        console.log("%c¡ALTO AHÍ, BYPASSER!", "color: #00d2ff; font-size: 25px; font-weight: bold; text-shadow: 2px 2px black;");
+        console.log("Detectado intento de intrusión en el Hub de Andy.");
+        console.log("Tu castigo por cotillear el código es traerme una tarta de chocolate.");
     </script>
 </body>
 </html>
