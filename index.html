@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>¡La Fiesta del Año!</title>
     <style>
-        /* Eliminamos todos los espacios y scrolls */
         * {
             margin: 0;
             padding: 0;
@@ -15,17 +14,71 @@
         body, html {
             width: 100%;
             height: 100%;
-            overflow: hidden; /* Evita el rebote o scroll innecesario */
-            background-color: #ffffff; /* Color de fondo mientras carga */
+            overflow: hidden;
+            background-color: #111111; /* Fondo oscuro moderno */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Forzamos al iframe a ser una capa absoluta sobre toda la pantalla */
+        h1 {
+            color: #ffffff;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            font-size: 2.5rem;
+        }
+
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 90%;
+            max-width: 450px;
+        }
+
+        .btn {
+            color: white;
+            text-decoration: none;
+            padding: 22px;
+            text-align: center;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            transition: transform 0.2s, background 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Botón de Invitación */
+        .btn-invitacion {
+            background: #e91e63;
+        }
+        .btn-invitacion:hover {
+            background: #c2185b;
+            transform: scale(1.03);
+        }
+
+        /* Botón de Escape Room */
+        .btn-escape {
+            background: #9c27b0;
+        }
+        .btn-escape:hover {
+            background: #7b1fa2;
+            transform: scale(1.03);
+        }
+
+        /* Contenedores para modo embed */
         .contenedor-genially {
+            display: none; /* Se oculta por defecto hasta seleccionar una opción */
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background-color: #ffffff;
         }
 
         iframe {
@@ -33,14 +86,41 @@
             height: 100%;
             border: none;
         }
+
+        .btn-volver {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 9999;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
 
-    <div class="contenedor-genially">
+    <h1 id="titulo-menu">¡BIENVENIDOS A MIS 13!</h1>
+    
+    <div class="menu-container" id="menu-botones">
+        <button class="btn btn-invitacion" onclick="mostrarGenially('https://view.genially.com/69f5b407e5dfae9ae1897d74', 'Invitación')">
+            💌 INVITACIÓN
+        </button>
+        <button class="btn btn-escape" onclick="mostrarGenially('https://view.genially.com/69f624e1d0a769f8e2813e36', 'Escape Room')">
+            🎮 ESCAPE ROOM
+        </button>
+    </div>
+
+    <div id="contenedorGenially" class="contenedor-genially">
+        <a href="javascript:ocultarGenially()" class="btn-volver">⬅ Volver al Menú</a>
         <iframe 
-            title="la fiesta del año" 
-            src="https://view.genially.com/69f5b407e5dfae9ae1897d74" 
+            id="iframeGenially"
+            title="Genially" 
+            src="" 
             type="text/html" 
             allowscriptaccess="always" 
             allowfullscreen="true" 
@@ -48,6 +128,34 @@
             allownetworking="all">
         </iframe>
     </div>
+
+    <script>
+        function mostrarGenially(url, titulo) {
+            // Ocultar menú
+            document.getElementById('titulo-menu').style.display = 'none';
+            document.getElementById('menu-botones').style.display = 'none';
+
+            // Mostrar el contenedor y asignar el título e iframe
+            const contenedor = document.getElementById('contenedorGenially');
+            const iframe = document.getElementById('iframeGenially');
+            
+            iframe.title = titulo;
+            iframe.src = url;
+            contenedor.style.display = 'block';
+        }
+
+        function ocultarGenially() {
+            // Ocultar el contenedor del iframe
+            document.getElementById('contenedorGenially').style.display = 'none';
+
+            // Mostrar el menú
+            document.getElementById('titulo-menu').style.display = 'block';
+            document.getElementById('menu-botones').style.display = 'flex';
+            
+            // Pausar/limpiar el iframe para que no consuma datos ni suene de fondo al salir
+            document.getElementById('iframeGenially').src = "";
+        }
+    </script>
 
 </body>
 </html>
