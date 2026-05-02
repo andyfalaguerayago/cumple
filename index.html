@@ -167,8 +167,8 @@
         </div>
     </div>
 
-    <!-- Música de fondo -->
-    <audio id="musica" loop>
+    <!-- Música de fondo - Ajustada para carga prioritaria -->
+    <audio id="musica" loop preload="auto">
         <source src="https://files.catbox.moe/v72zu4.mp3" type="audio/mpeg">
     </audio>
 
@@ -188,8 +188,10 @@
         const audio = document.getElementById('musica');
 
         function cerrarBienvenida() {
-            // Reproducir música (ahora el navegador lo permite por el clic)
-            audio.play();
+            // Se asegura que el audio esté cargado, sube volumen y reproduce
+            audio.volume = 1.0; 
+            audio.play().catch(error => console.log("Error al reproducir:", error));
+            
             // Ocultar cuadro
             document.getElementById('modal-bienvenida').style.opacity = '0';
             setTimeout(() => {
