@@ -4,6 +4,30 @@ Un portal web elegante e interactivo diseñado para centralizar todas las activi
 
 ---
 
+🚀 Requisitos del "Sistema" (Hardware Social)
+
+Para que este portal funcione correctamente en la vida real, asegúrate de cumplir con:
+
+CPU: Un cerebro con al menos 2GB de ganas de fiesta.
+
+Energía: Batería social por encima del 15% (si no, el Escape Room se pone difícil).
+
+Navegador: Cualquier cosa que no sea Internet Explorer. Por favor, estamos en 2026.
+
+Periféricos: Un refresco en la mano derecha y algo de picoteo en la izquierda.
+
+⚠️ Reporte de Vulnerabilidades (Seguridad)
+
+Si encuentras un "bug" crítico en la fiesta, sigue estos pasos:
+
+Vulnerabilidad de Hidratación: Si se acaba el hielo, contacta con el administrador en la barra inmediatamente.
+
+Fallo de Audio: Si la música no es de tu agrado, el sistema permite quejas, pero el DJ tiene un "firewall" de ignorancia activado.
+
+Error de Autenticación: Si no conoces a Andy, probablemente te has equivocado de repositorio (o de fiesta).
+
+---
+
 ## 🌟 Características
 
 * **Modal de Bienvenida**: Una interfaz de saludo profesional que prepara al usuario para la experiencia.
