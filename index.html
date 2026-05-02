@@ -167,9 +167,9 @@
         </div>
     </div>
 
-    <!-- Música de fondo - Ajustada para carga prioritaria -->
-    <audio id="musica" loop preload="auto">
-        <source src="https://files.catbox.moe/v72zu4.mp3" type="audio/mpeg">
+    <!-- Música de fondo - Enlace actualizado -->
+    <audio id="musica" loop preload="auto" crossorigin="anonymous">
+        <source src="https://file.garden/afW_Y0vtaUHOO25a/ElevenLabs_Aventura_Pixel.mp3" type="audio/mpeg">
     </audio>
 
     <h1>¿QUÉ QUIERES VER?</h1>
@@ -187,12 +187,23 @@
     <script>
         const audio = document.getElementById('musica');
 
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.load();
+        });
+
         function cerrarBienvenida() {
-            // Se asegura que el audio esté cargado, sube volumen y reproduce
-            audio.volume = 1.0; 
-            audio.play().catch(error => console.log("Error al reproducir:", error));
+            audio.volume = 1.0;
+            const playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    console.log("Reproducción iniciada");
+                }).catch(error => {
+                    console.log("Error de reproducción:", error);
+                    audio.play();
+                });
+            }
             
-            // Ocultar cuadro
             document.getElementById('modal-bienvenida').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('modal-bienvenida').style.display = 'none';
