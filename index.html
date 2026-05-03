@@ -120,7 +120,6 @@
         .btn-esc { background: linear-gradient(45deg, #9c27b0, #ba68c8); }
         .btn-git { background: linear-gradient(45deg, #333, #000); border: 1px solid #555; font-size: 0.8rem; margin-top: 5px; }
 
-        /* BOTÓN FLOTANTE DEL GATO */
         .btn-gato-flotante {
             position: fixed;
             bottom: 30px;
@@ -186,6 +185,10 @@
         </div>
     </div>
 
+    <!-- Elfsight Countdown Timer -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+    <div class="elfsight-app-5493391c-2281-4e7f-ae5a-f7bc28513ca7" data-elfsight-app-lazy></div>
+
     <div class="logo-wrapper">
         <img src="https://file.garden/afW_Y0vtaUHOO25a/cumpleandy_logo-vertical.png" 
              alt="Logo" 
@@ -200,10 +203,8 @@
         <button class="btn-opcion btn-git" onclick="window.open('https://github.com/bypssd/cumple/', '_blank')">📂 REPO GITHUB</button>
     </div>
 
-    <!-- BOTÓN CIRCULAR GATO -->
     <div class="btn-gato-flotante" onclick="miauYJuega()">🐈</div>
 
-    <!-- AUDIOS -->
     <audio id="audioConfeti" src="https://file.garden/afW_Y0vtaUHOO25a/confeti.mp3"></audio>
     <audio id="audioMiau" src="https://file.garden/afW_Y0vtaUHOO25a/gato-miau.mp3"></audio>
 
@@ -217,16 +218,10 @@
         const audioM = document.getElementById('audioMiau');
 
         function miauYJuega() {
-            // Reproducir miau
             audioM.play();
-            
-            // Esperar a que el audio termine para abrir el embed
             audioM.onended = function() {
                 abrir('https://cumple13.bypssd.com/tarta.html');
             };
-
-            // Backup por si el audio falla o es muy largo en algunos navegadores
-            // (opcional: quitar si prefieres que sea estricto)
             setTimeout(() => {
                 if (document.getElementById('contenedorGenially').style.display !== 'block') {
                     abrir('https://cumple13.bypssd.com/tarta.html');
