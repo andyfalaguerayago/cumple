@@ -5,15 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Hub del Cumpleaños de Andy</title>
     
-    <!-- FAVICON PARA NAVEGADOR -->
     <link rel="icon" type="image/png" href="https://file.garden/afW_Y0vtaUHOO25a/cumpleandy_logo-vertical.png">
-    
-    <!-- ICONO PARA IPHONE (PANTALLA DE INICIO) -->
-    <!-- Añadimos 'rel="apple-touch-icon"' y también una versión precomposed por si acaso -->
     <link rel="apple-touch-icon" href="https://file.garden/afW_Y0vtaUHOO25a/cumpleandy_logo-vertical.png">
-    <link rel="apple-touch-icon-precomposed" href="https://file.garden/afW_Y0vtaUHOO25a/cumpleandy_logo-vertical.png">
 
-    <!-- CONFIGURACIÓN APP WEB iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Cumple Andy">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -58,45 +52,9 @@
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             user-select: none;
             -webkit-tap-highlight-color: transparent;
-            z-index: 100;
-            display: block;
         }
 
-        @media (hover: hover) {
-            .logo-vertical:hover {
-                transform: scale(1.15);
-            }
-        }
-
-        .logo-vertical:active {
-            transform: scale(0.9) !important;
-            transition: transform 0.1s;
-        }
-
-        .logo-tap-mobile {
-            transform: scale(1.3);
-        }
-
-        .dedo-indicador {
-            position: absolute;
-            bottom: 20px;
-            right: -60px; 
-            font-size: 65px;
-            pointer-events: none;
-            z-index: 110;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-            animation: pointingIn 0.7s infinite alternate ease-in-out;
-        }
-
-        @keyframes pointingIn {
-            from { transform: translateX(0); }
-            to { transform: translateX(-45px); }
-        }
-
-        .ocultar {
-            opacity: 0 !important;
-        }
+        .logo-vertical:active { transform: scale(0.9); }
 
         #modal-bienvenida {
             position: fixed;
@@ -158,10 +116,33 @@
         }
         
         .btn-opcion:active { transform: scale(0.95); }
-
         .btn-inv { background: linear-gradient(45deg, #00d2ff, #3a7bd5); }
         .btn-esc { background: linear-gradient(45deg, #9c27b0, #ba68c8); }
         .btn-git { background: linear-gradient(45deg, #333, #000); border: 1px solid #555; font-size: 0.8rem; margin-top: 5px; }
+
+        /* BOTÓN FLOTANTE DEL GATO */
+        .btn-gato-flotante {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 154, 158, 0.5);
+            border: 3px solid white;
+            z-index: 999;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-gato-flotante:hover { transform: scale(1.1) rotate(10deg); }
+        .btn-gato-flotante:active { transform: scale(0.9); }
 
         #contenedorGenially {
             display: none;
@@ -187,6 +168,7 @@
             border-radius: 50px;
             text-decoration: none;
             border: 1px solid white;
+            font-weight: bold;
         }
 
         @media (min-width: 768px) {
@@ -205,7 +187,6 @@
     </div>
 
     <div class="logo-wrapper">
-        <div id="dedo" class="dedo-indicador">👈</div>
         <img src="https://file.garden/afW_Y0vtaUHOO25a/cumpleandy_logo-vertical.png" 
              alt="Logo" 
              class="logo-vertical" 
@@ -219,7 +200,12 @@
         <button class="btn-opcion btn-git" onclick="window.open('https://github.com/bypssd/cumple/', '_blank')">📂 REPO GITHUB</button>
     </div>
 
+    <!-- BOTÓN CIRCULAR GATO -->
+    <div class="btn-gato-flotante" onclick="miauYJuega()">🐈</div>
+
+    <!-- AUDIOS -->
     <audio id="audioConfeti" src="https://file.garden/afW_Y0vtaUHOO25a/confeti.mp3"></audio>
+    <audio id="audioMiau" src="https://file.garden/afW_Y0vtaUHOO25a/gato-miau.mp3"></audio>
 
     <div id="contenedorGenially">
         <a href="javascript:cerrar()" class="btn-volver">⬅ VOLVER</a>
@@ -227,44 +213,37 @@
     </div>
 
     <script>
-        const audio = document.getElementById('audioConfeti');
-        const dedo = document.getElementById('dedo');
-        const logo = document.getElementById('logoAndy');
+        const audioC = document.getElementById('audioConfeti');
+        const audioM = document.getElementById('audioMiau');
+
+        function miauYJuega() {
+            // Reproducir miau
+            audioM.play();
+            
+            // Esperar a que el audio termine para abrir el embed
+            audioM.onended = function() {
+                abrir('https://cumple13.bypssd.com/tarta.html');
+            };
+
+            // Backup por si el audio falla o es muy largo en algunos navegadores
+            // (opcional: quitar si prefieres que sea estricto)
+            setTimeout(() => {
+                if (document.getElementById('contenedorGenially').style.display !== 'block') {
+                    abrir('https://cumple13.bypssd.com/tarta.html');
+                }
+            }, 2000); 
+        }
 
         function lanzarCelebracion() {
-            logo.classList.add('logo-tap-mobile');
-            setTimeout(() => logo.classList.remove('logo-tap-mobile'), 300);
-            dedo.classList.add('ocultar');
-            
-            audio.currentTime = 0;
-            audio.play();
-
+            audioC.currentTime = 0;
+            audioC.play();
             const duration = 2.5 * 1000;
             const end = Date.now() + duration;
 
             (function frame() {
-                confetti({
-                    particleCount: 4,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0, y: 0.5 }
-                });
-                confetti({
-                    particleCount: 4,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1, y: 0.5 }
-                });
-                confetti({
-                    particleCount: 2,
-                    angle: 90,
-                    spread: 100,
-                    origin: { x: 0.5, y: 0.3 }
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
+                confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0, y: 0.5 } });
+                confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1, y: 0.5 } });
+                if (Date.now() < end) requestAnimationFrame(frame);
             }());
         }
 
@@ -272,9 +251,6 @@
             document.getElementById('modal-bienvenida').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('modal-bienvenida').style.display = 'none';
-                setTimeout(() => {
-                    dedo.classList.add('ocultar');
-                }, 3000);
             }, 500);
         }
 
