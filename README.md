@@ -85,7 +85,7 @@ Este proyecto es de código abierto. ¡Siéntete libre de usarlo para tus propia
 
 ---
 
-Para contactar con nosotros, sugerir funciones, o enviar errores, utilizar la dirección de correo *mailto:cumple13@bypssd.com*
+Para contactar con nosotros, sugerir funciones, o enviar errores, utilizar la dirección de correo *cumple13@bypssd.com*
 
 ---
 <div align="center">Desarrollado con ❤️ para el cumpleaños de Andy.</div>
