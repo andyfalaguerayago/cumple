@@ -62,6 +62,7 @@ El proyecto utiliza una lógica de Aplicación de una sola página (SPA) efectiv
 
 ```plaintext
 ├── index.html          # Portal principal (Estructura, Estilos y Lógica de Audio/Embed)
+├── felicidades.sh      # Minijuego del cumpleaños (pastel) para terminal
 ├── tarta.html          # Minijuego del Gato (Scroll lateral con obstáculos)
 └── README.md           # Documentación técnica y social
 ```
