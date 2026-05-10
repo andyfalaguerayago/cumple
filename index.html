@@ -8,8 +8,10 @@
     <link rel="icon" type="image/png" href="https://file.garden/afW_Y0vtaUHOO25a/cumpleandy_logo-vertical.png">
     <link rel="apple-touch-icon" href="https://file.garden/afW_Y0vtaUHOO25a/cumpleandy_logo-vertical.png">
 
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d2ff">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Cumple Andy">
+    <meta name="apple-mobile-web-app-title" content="Cumpleaños de Andy">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -185,7 +187,6 @@
         </div>
     </div>
 
-    <!-- Elfsight Countdown Timer -->
     <script src="https://elfsightcdn.com/platform.js" async></script>
     <div class="elfsight-app-5493391c-2281-4e7f-ae5a-f7bc28513ca7" data-elfsight-app-lazy></div>
 
@@ -216,6 +217,13 @@
     <script>
         const audioC = document.getElementById('audioConfeti');
         const audioM = document.getElementById('audioMiau');
+
+        // Registro del Service Worker para habilitar la instalación PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(err => console.log('SW no registrado', err));
+            });
+        }
 
         function miauYJuega() {
             audioM.play();
